@@ -17,10 +17,9 @@ function App() {
 
   const formSubmitHandler = data => {
     const checkSameName =
-      contacts.some(({ name, number }) =>
-        name.toLowerCase() === data.name.toLowerCase() && number === data.number);
+      contacts.some(({ name }) => name.toLowerCase() === data.name.toLowerCase());
     
-    const message = `${data.name} with this phone number - ${data.number} are already in contacts!`;
+    const message = `${data.name} is already in contacts!`;
 
     setContacts(state => {
       return checkSameName ? (alert(message), state) :
@@ -51,9 +50,9 @@ function App() {
           <ContactForm onSubmit={formSubmitHandler} />   
         </Section>
 
-        <Section title="Contacts">
-          
-          {contacts.length === 0  ? 
+        <Section title="Contacts"> 
+          {
+            contacts.length === 0 ? 
             <Notification message="Contacts book is empty!" /> :
             <>
               <ContactsFilter
@@ -65,13 +64,11 @@ function App() {
                 onClickDelete={deleteContact}
               /> 
             </>
-            
+              
           }
-           
         </Section>
       </>  
     )
-
 }
 
 export default App;
